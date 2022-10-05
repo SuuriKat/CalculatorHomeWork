@@ -83,7 +83,7 @@ void MainWindow::on_button_answer_clicked()
 
                 else if (ui->button_divide->isChecked())
                 {
-                    if (secondNumber != 0) // Проверка для деления на ноль
+                    if (abs(secondNumber) != 0.0) // Проверка для деления на ноль
                     {
                         outputText.setNum(firstNumber / secondNumber);
                         division.setNum(fmod(firstNumber, secondNumber));
@@ -101,11 +101,13 @@ void MainWindow::on_button_answer_clicked()
 
                 else if (ui->button_dupper->isChecked())
                 {
-                    if (firstNumber >= 0) // Проверка на знак под корнем
+                    if (firstNumber >= 0.0 and abs(secondNumber) > 0.0) // Проверка на знак под корнем
                         outputText.setNum(pow(firstNumber, 1/secondNumber));
 
-                    else
-                        outputText = "Не завезли комплексные числа, пока...";
+                    else if(abs(secondNumber) == 0.0)
+                        outputText = "Корня 0 степени не существует";
+                    else if (firstNumber < 0)
+                        outputText = "Нельзя брать корень из отрицательного числа";
                 }
             }
 
